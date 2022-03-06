@@ -1,28 +1,52 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include <map>
 #include "Students.h"
 
 using namespace std;
 
-Students::Students(){};
+const int Students::ARRAY_SIZE;
 
-Students::Students(string studentID, string firstName, string lastName, string email, int age, int numbersOfDaysToCompleteeachCourse[3], string degree)
+Students::Students() {
+    this->studentID = "";
+    this->firstName = "";
+    this->lastName = "";
+    this->email = "";
+    this->age = 0;
+
+    for (int i = 0; i < Students::ARRAY_SIZE; i++) {
+        this->numbersOfDaysToCompleteeachCourse[i] = 0;
+    };
+
+    this->degree = "";
+};
+
+Students::Students(
+    string studentID,
+    string firstName,
+    string lastName,
+    string email,
+    int age,
+    int numbersOfDaysToCompleteeachCourse[Students::ARRAY_SIZE],
+    string degree)
 {
-    this-> studentID = studentID; 
-    this-> firstName = firstName; 
-    this-> lastName = lastName; 
-    this-> email = email; 
-    this-> age = age; 
-    this-> numbersOfDaysToCompleteeachCourse[0] =  numbersOfDaysToCompleteeachCourse[0];
-    this-> numbersOfDaysToCompleteeachCourse[1] =  numbersOfDaysToCompleteeachCourse[1];
-    this-> numbersOfDaysToCompleteeachCourse[2] =  numbersOfDaysToCompleteeachCourse[2];
-    this-> degree = degree; 
+    this->studentID = studentID;
+    this->firstName = firstName;
+    this->lastName = lastName;
+    this->email = email;
+    this->age = age;
+
+    for (int i = 0; i < Students::ARRAY_SIZE; i++) {
+        this->numbersOfDaysToCompleteeachCourse[i] = numbersOfDaysToCompleteeachCourse[i];
+    };
+
+    this->degree = degree;
 };
 
 Students::~Students()
 {
-    cout<< "students " << firstName << " is been destroyed" << endl;
+    cout << "students " << firstName << " is been destroyed" << endl;
 };
 // stundentID getters and setters
 void Students::setStudentID(string studentID)
@@ -39,7 +63,7 @@ void Students::setFirstName(string firstName)
 {
     this->firstName = firstName;
 };
-string getFirstName()
+string Students::getFirstName()
 {
     return firstName;
 };
@@ -74,30 +98,51 @@ int Students::getAge()
     return age;
 };
 
-// numbersOfDaysToCompleteeachCourse getters and setters
-void Students::setNumbersOfDaysToCompleteeachCourse(int value, int index)
+//numbersOfDaysToCompleteeachCourse getters and setters
+void Students::setNumbersOfDaysToCompleteCourse(int numsOfDaysToCompleteeachCourse[Students::ARRAY_SIZE])
 {
-    
-        this->numbersOfDaysToCompleteeachCourse[index] = value; 
+    for (int i = 0; i < Students::ARRAY_SIZE; i++) {
+        this->numbersOfDaysToCompleteeachCourse[i] = numsOfDaysToCompleteeachCourse[i];
+    };
+};
+   
+
+int* Students::getNumbersOfDaysToCompleteCourse()
+{
+     return numbersOfDaysToCompleteeachCourse;
 };
 
-// array <array int> Students::getNumbersOfDaysToCompleteeachCourse()
-// {
-//     return this->numbersOfDaysToCompleteeachCourse;
-// }
-
 // age getters and setters
-void Students::setDegree(int age)
+void Students::setDegree(string degree)
 {
-    this->age = age;
+    this->degree = degree;
 };
 string Students::getDegree()
 {
     return degree;
 };
 
-template <typename ValueType>
-void Students::print(ValueType studentData)
-{
-    cout << studentData << endl;
-};
+void Students::print()
+{   
+    string temp = "";
+    for (int i = 0; i < Students::ARRAY_SIZE; i++) {
+        temp = temp + to_string(getNumbersOfDaysToCompleteCourse()[i]) + ", ";
+    };
+
+    cout << " Student ID: "
+        << getStudentID() << "    "
+        << " First Name: "
+        << getFirstName() << "    "
+        << " Last Name: "
+        << getLastName() << "    "
+        << " Email: "
+        << getEmail() << "    "
+        << " Age: "
+        << getAge() << "    "
+        << " Days in Course: "
+        << temp << "    "
+        << " Degree Program: "
+        << getDegree() << endl;
+         
+}
+    

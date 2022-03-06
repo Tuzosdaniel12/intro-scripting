@@ -1,4 +1,3 @@
-
 #ifndef STUDENTS_H
 #define STUDENTS_H
 
@@ -8,17 +7,20 @@ using namespace std;
 
 class Students
 {
-public:
-    //constructors
-    Students();
-    Students(string studentID,
-    string firstName,
-    string lastName,
-    string email,
-    int age,
-    array<int,3> numbersOfDaysToCompleteeachCourse,
-    string degree);
+    public:
+    static const int ARRAY_SIZE = 3;
 
+    Students();
+
+    Students(
+        string studentID,
+        string firstName,
+        string lastName,
+        string email,
+        int age,
+        int numbersOfDaysToCompleteeachCourse[ARRAY_SIZE],
+        string degree);
+  
     //deconstructors
     ~Students();
 
@@ -29,7 +31,7 @@ public:
     // firstName getters and setters
     void setFirstName(string firstName);
     string getFirstName();
- 
+
     // lastName getters
     void setLastName(string lastName);
     string getLastName();
@@ -43,23 +45,22 @@ public:
     int getAge();
 
     // numbersOfDaysToCompleteeachCourse getters
-    void setNumbersOfDaysToCompleteeachCourse(int value, int index);
-
-    // int * getNumbersOfDaysToCompleteeachCourse();
+    void setNumbersOfDaysToCompleteCourse(int numsOfDaysToCompleteeachCourse[ARRAY_SIZE]);
+    int* getNumbersOfDaysToCompleteCourse();
 
     // age getters
-    void setDegree(int age);
+    void setDegree(string degree);
     string getDegree();
 
-    template <typename ValueType> void print(ValueType studentData);
+    void print();
 
-private:
-    string studentID;
-    string firstName;
-    string lastName;
-    string email;
-    int age;
-    array <int,3> numbersOfDaysToCompleteeachCourse;
-    string degree;
+    private:
+        string studentID;
+        string firstName;
+        string lastName;
+        string email;
+        int age;
+        int numbersOfDaysToCompleteeachCourse[ARRAY_SIZE];
+        string degree;
 };
 #endif
